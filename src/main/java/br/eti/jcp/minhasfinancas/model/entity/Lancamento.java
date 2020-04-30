@@ -2,8 +2,12 @@ package br.eti.jcp.minhasfinancas.model.entity;
 
 import br.eti.jcp.minhasfinancas.model.enums.StatusLancamento;
 import br.eti.jcp.minhasfinancas.model.enums.TipoLancamento;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.Column;
@@ -24,6 +28,10 @@ import java.time.LocalDate;
 @Table(name = "lancamento", schema = "financas")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamicInsert
+@DynamicUpdate
 public class Lancamento {
 
     @Id
@@ -47,7 +55,7 @@ public class Lancamento {
     @Column(name = "valor", nullable = false)
     private BigDecimal valor;
 
-    @Column(name = "data_cadastro", nullable = false)
+    @Column(name = "data_cadastro", nullable = true)
     @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
     private LocalDate dataCadastro;
 
